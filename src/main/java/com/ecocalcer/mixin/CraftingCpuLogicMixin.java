@@ -24,19 +24,21 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
  */
 @Mixin(CraftingCpuLogic.class)
 public abstract class CraftingCpuLogicMixin {
+    // @ModifyVariable handlers receive the modified variable first, followed by ALL of the
+    // original method arguments (including the variable's original value).
     @ModifyVariable(method = "insert", at = @At("HEAD"), argsOnly = true, index = 2, remap = false)
-    private long ecocalcer$recycleSelfLoop(long amount, AEKey what, Actionable type) {
-        if (amount <= 0) {
-            return amount;
+    private long ecocalcer$recycleSelfLoop(long value, AEKey what, long amount, Actionable type) {
+        if (value <= 0) {
+            return value;
         }
         try {
             if (CraftingCpuReflect.shouldRecycle(this, what)) {
                 CraftingCpuReflect.recycle(this, what);
-                return amount - 1;
+                return value - 1;
             }
         } catch (Throwable t) {
             EcoCalcMod.LOGGER.warn("CPU recycle failed", t);
         }
-        return amount;
+        return value;
     }
 }
