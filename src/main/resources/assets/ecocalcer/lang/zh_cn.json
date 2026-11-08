@@ -1,0 +1,14 @@
+{
+  "gui.ecocalcer.fast_planner": "高速规划器",
+  "gui.ecocalcer.fast_planner.toggle.fast": "快速规划：%s",
+  "gui.ecocalcer.fast_planner.toggle.cycle": "环计算：%s",
+  "gui.ecocalcer.fast_planner.stats.time": "上次规划耗时：%s μs",
+  "gui.ecocalcer.fast_planner.stats.cycles": "检测到依赖环：%s 个",
+  "gui.ecocalcer.fast_planner.hint": "启用的开关会接管本网络上的 AE2 合成计划计算",
+  "gui.ecocalcer.fast_planner.graph.empty": "暂无规划记录：开启开关后进行任意合成即可生成环图",
+  "gui.ecocalcer.on": "开",
+  "gui.ecocalcer.off": "关",
+  "itemGroup.ecocalcer": "ECO 高速规划器",
+  "block.ecocalcer.fast_planner": "高速规划器",
+  "pack.ecocalcer.description": "ECO 高速规划器资源包"
+}

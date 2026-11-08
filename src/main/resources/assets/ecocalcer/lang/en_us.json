@@ -1,0 +1,14 @@
+{
+  "gui.ecocalcer.fast_planner": "Fast Planner",
+  "gui.ecocalcer.fast_planner.toggle.fast": "Fast planner: %s",
+  "gui.ecocalcer.fast_planner.toggle.cycle": "Cycle solver: %s",
+  "gui.ecocalcer.fast_planner.stats.time": "Last plan: %s μs",
+  "gui.ecocalcer.fast_planner.stats.cycles": "Detected cycles: %s",
+  "gui.ecocalcer.fast_planner.hint": "Enabled toggles take over AE2 crafting plan calculation on this network",
+  "gui.ecocalcer.fast_planner.graph.empty": "No plan recorded yet - craft something with a toggle enabled to build the cycle graph",
+  "gui.ecocalcer.on": "ON",
+  "gui.ecocalcer.off": "OFF",
+  "itemGroup.ecocalcer": "ECO Fast Planner",
+  "block.ecocalcer.fast_planner": "Fast Planner",
+  "pack.ecocalcer.description": "ECO Fast Planner resources"
+}

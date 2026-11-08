@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "ecocalcer:block/fast_planner"
+    }
+  }
+}
