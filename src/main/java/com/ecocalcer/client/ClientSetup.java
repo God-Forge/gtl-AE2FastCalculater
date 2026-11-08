@@ -12,6 +12,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ClientSetup {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        event.enqueueWork(() -> MenuScreens.register(ModMenus.FAST_PLANNER.get(), FastPlannerScreen::new));
+        event.enqueueWork(() -> {
+            MenuScreens.register(ModMenus.FAST_PLANNER.get(), FastPlannerScreen::new);
+            MenuScreens.register(ModMenus.CPU_SCHEDULER.get(), CpuSchedulerScreen::new);
+        });
     }
 }

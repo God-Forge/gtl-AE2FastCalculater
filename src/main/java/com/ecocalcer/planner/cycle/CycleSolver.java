@@ -132,6 +132,147 @@ public final class CycleSolver {
         map.put(key, next);
     }
 
+    /**
+     * Solves a concrete *preview* plan for a self-replicating cycle.
+     * <p>
+     * Example: a smithing template duplication pattern consumes one template (plus
+     * material) and produces two templates. Starting from one template in the network
+     * the cycle grows by one template per craft, so {@code N - stock} crafts are needed.
+     * AE2's own planner refuses this pattern because its input equals its output, so the
+     * plan can never be produced without a dedicated solver like this one.
+     * <p>
+     * The returned plan is a simulation ({@code simulation = true}): it is shown by the
+     * confirmation screen, but it cannot be dispatched, because AE2's CPU task model
+     * requires all inputs of a task up-front while a self-replicating pattern feeds
+     * itself from its own output.
+     */
+    public static CyclePlan solvePlan(IGrid grid, AEKey target, long amount) {
+        ICraftingService crafting = grid.getCraftingService();
+        KeyCounter inventory = grid.getStorageService().getCachedInventory();
+
+        KeyCounter used = new KeyCounter();
+        KeyCounter emitted = new KeyCounter();
+        KeyCounter missing = new KeyCounter();
+        Map<IPatternDetails, Long> patternTimes = new LinkedHashMap<>();
+        Map<AEKey, Long> consumed = new HashMap<>();
+
+        ArrayDeque<Demand> queue = new ArrayDeque<>();
+        queue.add(new Demand(target, amount, 0));
+        boolean hasCycle = false;
+        int steps = 0;
+
+        while (!queue.isEmpty() && steps < MAX_STEPS) {
+            Demand demand = queue.poll();
+            steps++;
+
+            long need = demand.amount;
+            if (need <= 0) {
+                continue;
+            }
+
+            // Use whatever the network already has.
+            long available = inventory.get(demand.key) - consumed.getOrDefault(demand.key, 0L);
+            if (available > 0) {
+                long use = Math.min(available, need);
+                consumed.merge(demand.key, use, Long::sum);
+                used.add(demand.key, use);
+                need -= use;
+            }
+            if (need <= 0) {
+                continue;
+            }
+
+            if (demand.depth >= MAX_DEPTH) {
+                missing.add(demand.key, need);
+                continue;
+            }
+
+            IPatternDetails pattern = pickPattern(crafting, demand.key);
+            if (pattern == null) {
+                missing.add(demand.key, need);
+                continue;
+            }
+
+            long out = outputAmount(pattern, demand.key);
+            if (out <= 0) {
+                missing.add(demand.key, need);
+                continue;
+            }
+
+            long selfIn = selfInputAmount(pattern, demand.key);
+            if (selfIn > 0) {
+                hasCycle = true;
+                long per = out - selfIn;
+                if (per <= 0) {
+                    missing.add(demand.key, need);
+                    continue;
+                }
+                long times = (need + per - 1) / per;
+                patternTimes.merge(pattern, times, Long::sum);
+
+                // The cycle needs at least selfIn copies of the key in the loop as a seed.
+                long stockUsed = consumed.getOrDefault(demand.key, 0L);
+                long seedMissing = Math.max(0L, selfIn - stockUsed);
+                if (seedMissing > 0) {
+                    missing.add(demand.key, seedMissing);
+                }
+
+                for (IPatternDetails.IInput input : pattern.getInputs()) {
+                    GenericStack[] possible = input.getPossibleInputs();
+                    if (possible.length == 0 || possible[0].what() == null) {
+                        continue;
+                    }
+                    AEKey inKey = possible[0].what();
+                    if (inKey.equals(demand.key)) {
+                        continue;
+                    }
+                    long inAmount = safeMultiply(input.getMultiplier(), times, possible[0].amount());
+                    queue.add(new Demand(inKey, inAmount, demand.depth + 1));
+                }
+            } else {
+                long times = (need + out - 1) / out;
+                patternTimes.merge(pattern, times, Long::sum);
+
+                for (IPatternDetails.IInput input : pattern.getInputs()) {
+                    GenericStack[] possible = input.getPossibleInputs();
+                    if (possible.length == 0 || possible[0].what() == null) {
+                        continue;
+                    }
+                    long inAmount = safeMultiply(input.getMultiplier(), times, possible[0].amount());
+                    queue.add(new Demand(possible[0].what(), inAmount, demand.depth + 1));
+                }
+            }
+        }
+
+        long bytes = 0;
+        for (long t : patternTimes.values()) {
+            bytes += t * 8L;
+        }
+        return new CyclePlan(target, amount, hasCycle, patternTimes, used, emitted, missing, bytes);
+    }
+
+    private static long selfInputAmount(IPatternDetails pattern, AEKey key) {
+        long total = 0;
+        for (IPatternDetails.IInput input : pattern.getInputs()) {
+            GenericStack[] possible = input.getPossibleInputs();
+            if (possible.length == 0 || possible[0].what() == null) {
+                continue;
+            }
+            if (key.equals(possible[0].what())) {
+                total += input.getMultiplier() * possible[0].amount();
+            }
+        }
+        return total;
+    }
+
+    private static long safeMultiply(long a, long b, long c) {
+        try {
+            return Math.multiplyExact(Math.multiplyExact(a, b), c);
+        } catch (ArithmeticException overflow) {
+            return Long.MAX_VALUE;
+        }
+    }
+
     private record Demand(AEKey key, long amount, int depth) {
     }
 }

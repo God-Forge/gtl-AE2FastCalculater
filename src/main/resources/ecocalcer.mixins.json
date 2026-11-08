@@ -6,6 +6,7 @@
   "refmap": "ecocalcer.refmap.json",
   "mixins": [
     "CraftingCalculationMixin",
+    "CraftingCpuLogicMixin",
     "CraftingServiceMixin"
   ],
   "client": [],

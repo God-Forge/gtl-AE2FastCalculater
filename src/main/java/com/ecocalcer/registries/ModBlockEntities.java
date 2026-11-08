@@ -1,6 +1,7 @@
 package com.ecocalcer.registries;
 
 import com.ecocalcer.EcoCalcMod;
+import com.ecocalcer.blockentity.CpuSchedulerBlockEntity;
 import com.ecocalcer.blockentity.FastPlannerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
@@ -17,5 +18,10 @@ public final class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<FastPlannerBlockEntity>> FAST_PLANNER =
             BLOCK_ENTITIES.register("fast_planner", () -> BlockEntityType.Builder
                     .of(FastPlannerBlockEntity::new, ModBlocks.FAST_PLANNER.get())
+                    .build(null));
+
+    public static final RegistryObject<BlockEntityType<CpuSchedulerBlockEntity>> CPU_SCHEDULER =
+            BLOCK_ENTITIES.register("cpu_scheduler", () -> BlockEntityType.Builder
+                    .of(CpuSchedulerBlockEntity::new, ModBlocks.CPU_SCHEDULER.get())
                     .build(null));
 }

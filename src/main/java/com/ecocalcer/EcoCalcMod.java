@@ -1,5 +1,6 @@
 package com.ecocalcer;
 
+import com.ecocalcer.blockentity.CpuSchedulerBlockEntity;
 import com.ecocalcer.blockentity.FastPlannerBlockEntity;
 import com.ecocalcer.net.ModNetwork;
 import com.ecocalcer.registries.ModBlockEntities;
@@ -36,10 +37,17 @@ public class EcoCalcMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> ModBlocks.FAST_PLANNER.get().setBlockEntity(
-                FastPlannerBlockEntity.class,
-                ModBlockEntities.FAST_PLANNER.get(),
-                null,
-                null));
+        event.enqueueWork(() -> {
+            ModBlocks.FAST_PLANNER.get().setBlockEntity(
+                    FastPlannerBlockEntity.class,
+                    ModBlockEntities.FAST_PLANNER.get(),
+                    null,
+                    null);
+            ModBlocks.CPU_SCHEDULER.get().setBlockEntity(
+                    CpuSchedulerBlockEntity.class,
+                    ModBlockEntities.CPU_SCHEDULER.get(),
+                    null,
+                    null);
+        });
     }
 }

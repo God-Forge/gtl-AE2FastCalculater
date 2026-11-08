@@ -6,9 +6,16 @@
   "gui.ecocalcer.fast_planner.stats.cycles": "Detected cycles: %s",
   "gui.ecocalcer.fast_planner.hint": "Enabled toggles take over AE2 crafting plan calculation on this network",
   "gui.ecocalcer.fast_planner.graph.empty": "No plan recorded yet - craft something with a toggle enabled to build the cycle graph",
+  "gui.ecocalcer.cpu_scheduler": "CPU Scheduler",
+  "gui.ecocalcer.cpu_scheduler.add": "Add",
+  "gui.ecocalcer.cpu_scheduler.remove": "Remove",
+  "gui.ecocalcer.cpu_scheduler.busy": "BUSY",
+  "gui.ecocalcer.cpu_scheduler.idle": "IDLE",
+  "gui.ecocalcer.cpu_scheduler.empty": "No crafting CPUs detected in this network",
   "gui.ecocalcer.on": "ON",
   "gui.ecocalcer.off": "OFF",
   "itemGroup.ecocalcer": "ECO Fast Planner",
   "block.ecocalcer.fast_planner": "Fast Planner",
+  "block.ecocalcer.cpu_scheduler": "CPU Scheduler",
   "pack.ecocalcer.description": "ECO Fast Planner resources"
 }
