@@ -44,7 +44,7 @@ public class EcoCalcMod {
                     null,
                     null);
             ModBlocks.CPU_SCHEDULER.get().setBlockEntity(
-                    CpuSchedulerBlockEntity.class,
+                    appeng.blockentity.crafting.CraftingBlockEntity.class,
                     ModBlockEntities.CPU_SCHEDULER.get(),
                     null,
                     null);

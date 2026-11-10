@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "ecocalcer.refmap.json",
   "mixins": [
+    "CraftingBlockEntityMixin",
     "CraftingCalculationMixin",
     "CraftingCpuLogicMixin",
     "CraftingServiceMixin"

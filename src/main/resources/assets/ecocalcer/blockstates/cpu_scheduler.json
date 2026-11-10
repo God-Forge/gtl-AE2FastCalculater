@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
+      "model": "ecocalcer:block/cpu_scheduler"
+    },
+    "formed=true": {
       "model": "ecocalcer:block/cpu_scheduler"
     }
   }

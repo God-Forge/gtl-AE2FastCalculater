@@ -1,7 +1,6 @@
 package com.ecocalcer.registries;
 
 import com.ecocalcer.EcoCalcMod;
-import com.ecocalcer.menu.CpuSchedulerMenu;
 import com.ecocalcer.menu.FastPlannerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -18,7 +17,4 @@ public final class ModMenus {
 
     public static final RegistryObject<MenuType<FastPlannerMenu>> FAST_PLANNER =
             MENUS.register("fast_planner", () -> IForgeMenuType.create(FastPlannerMenu::new));
-
-    public static final RegistryObject<MenuType<CpuSchedulerMenu>> CPU_SCHEDULER =
-            MENUS.register("cpu_scheduler", () -> IForgeMenuType.create(CpuSchedulerMenu::new));
 }

@@ -25,21 +25,9 @@ public final class ModNetwork {
                 CycleGraphPacket::encode,
                 CycleGraphPacket::decode,
                 CycleGraphPacket::handle);
-        CHANNEL.registerMessage(id++, CpuListPacket.class,
-                CpuListPacket::encode,
-                CpuListPacket::decode,
-                CpuListPacket::handle);
-        CHANNEL.registerMessage(id++, CpuTogglePacket.class,
-                CpuTogglePacket::encode,
-                CpuTogglePacket::decode,
-                CpuTogglePacket::handle);
     }
 
     public static void sendToPlayer(ServerPlayer player, Object packet) {
         CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
-    }
-
-    public static void sendToServer(Object packet) {
-        CHANNEL.sendToServer(packet);
     }
 }
