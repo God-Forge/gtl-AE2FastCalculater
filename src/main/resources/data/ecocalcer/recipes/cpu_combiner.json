@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QGQ",
+    "QCQ",
+    "QGQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "ae2:quartz_glass"
+    },
+    "G": {
+      "item": "ae2:calculation_processor"
+    },
+    "C": {
+      "item": "ae2:crafting_unit"
+    }
+  },
+  "result": {
+    "item": "ecocalcer:cpu_combiner"
+  }
+}

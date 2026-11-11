@@ -6,16 +6,11 @@
   "gui.ecocalcer.fast_planner.stats.cycles": "检测到依赖环：%s 个",
   "gui.ecocalcer.fast_planner.hint": "启用的开关会接管本网络上的 AE2 合成计划计算",
   "gui.ecocalcer.fast_planner.graph.empty": "暂无规划记录：开启开关后进行任意合成即可生成环图",
-  "gui.ecocalcer.cpu_scheduler": "CPU增强调度器",
-  "gui.ecocalcer.cpu_scheduler.add": "添加",
-  "gui.ecocalcer.cpu_scheduler.remove": "移除",
-  "gui.ecocalcer.cpu_scheduler.busy": "运行中",
-  "gui.ecocalcer.cpu_scheduler.idle": "空闲",
-  "gui.ecocalcer.cpu_scheduler.empty": "网络中未检测到合成 CPU",
   "gui.ecocalcer.on": "开",
   "gui.ecocalcer.off": "关",
   "itemGroup.ecocalcer": "ECO 高速规划器",
   "block.ecocalcer.fast_planner": "高速规划器",
   "block.ecocalcer.cpu_scheduler": "CPU增强调度器",
+  "block.ecocalcer.cpu_combiner": "CPU组合器",
   "pack.ecocalcer.description": "ECO 高速规划器资源包"
 }

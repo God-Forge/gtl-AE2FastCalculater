@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "formed=false": {
+      "model": "ecocalcer:block/cpu_combiner"
+    },
+    "formed=true": {
+      "model": "ecocalcer:block/cpu_combiner"
+    }
+  }
+}

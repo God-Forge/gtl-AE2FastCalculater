@@ -1,6 +1,7 @@
 package com.ecocalcer.registries;
 
 import com.ecocalcer.EcoCalcMod;
+import com.ecocalcer.blockentity.CpuCombinerBlockEntity;
 import com.ecocalcer.blockentity.CpuSchedulerBlockEntity;
 import com.ecocalcer.blockentity.FastPlannerBlockEntity;
 import appeng.blockentity.crafting.CraftingBlockEntity;
@@ -21,11 +22,17 @@ public final class ModBlockEntities {
                     .of(FastPlannerBlockEntity::new, ModBlocks.FAST_PLANNER.get())
                     .build(null));
 
-    // The CPU scheduler is an AE2 crafting unit: its block/entity generic type is
-    // CraftingBlockEntity, so the registry entry is widened accordingly.
+    // CPU scheduler / combiner are AE2 crafting units: their block/entity generic type is
+    // CraftingBlockEntity, so the registry entries are widened accordingly.
     @SuppressWarnings("unchecked")
     public static final RegistryObject<BlockEntityType<CraftingBlockEntity>> CPU_SCHEDULER =
             BLOCK_ENTITIES.register("cpu_scheduler", () -> (BlockEntityType<CraftingBlockEntity>) (BlockEntityType<?>) BlockEntityType.Builder
                     .of(CpuSchedulerBlockEntity::new, ModBlocks.CPU_SCHEDULER.get())
+                    .build(null));
+
+    @SuppressWarnings("unchecked")
+    public static final RegistryObject<BlockEntityType<CraftingBlockEntity>> CPU_COMBINER =
+            BLOCK_ENTITIES.register("cpu_combiner", () -> (BlockEntityType<CraftingBlockEntity>) (BlockEntityType<?>) BlockEntityType.Builder
+                    .of(CpuCombinerBlockEntity::new, ModBlocks.CPU_COMBINER.get())
                     .build(null));
 }

@@ -48,6 +48,11 @@ public class EcoCalcMod {
                     ModBlockEntities.CPU_SCHEDULER.get(),
                     null,
                     null);
+            ModBlocks.CPU_COMBINER.get().setBlockEntity(
+                    appeng.blockentity.crafting.CraftingBlockEntity.class,
+                    ModBlockEntities.CPU_COMBINER.get(),
+                    null,
+                    null);
         });
     }
 }

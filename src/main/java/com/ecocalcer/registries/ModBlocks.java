@@ -1,6 +1,7 @@
 package com.ecocalcer.registries;
 
 import com.ecocalcer.EcoCalcMod;
+import com.ecocalcer.block.CpuCombinerBlock;
 import com.ecocalcer.block.CpuSchedulerBlock;
 import com.ecocalcer.block.FastPlannerBlock;
 import net.minecraft.world.item.BlockItem;
@@ -36,12 +37,19 @@ public final class ModBlocks {
     public static final RegistryObject<BlockItem> CPU_SCHEDULER_ITEM =
             ITEMS.register("cpu_scheduler", () -> new BlockItem(CPU_SCHEDULER.get(), new Item.Properties()));
 
+    public static final RegistryObject<CpuCombinerBlock> CPU_COMBINER =
+            BLOCKS.register("cpu_combiner", CpuCombinerBlock::new);
+
+    public static final RegistryObject<BlockItem> CPU_COMBINER_ITEM =
+            ITEMS.register("cpu_combiner", () -> new BlockItem(CPU_COMBINER.get(), new Item.Properties()));
+
     public static final RegistryObject<CreativeModeTab> TAB = TABS.register("main", () -> CreativeModeTab.builder()
             .title(net.minecraft.network.chat.Component.translatable("itemGroup.ecocalcer"))
             .icon(() -> new ItemStack(FAST_PLANNER_ITEM.get()))
             .displayItems((parameters, output) -> {
                 output.accept(FAST_PLANNER_ITEM.get());
                 output.accept(CPU_SCHEDULER_ITEM.get());
+                output.accept(CPU_COMBINER_ITEM.get());
             })
             .build());
 }
